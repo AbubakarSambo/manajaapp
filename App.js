@@ -71,8 +71,8 @@ const SwitchNavigator = createSwitchNavigator(
     App: AppStack,
   },
   {
-    // initialRouteName: AsyncStorage.getItem('token') ? 'App' : 'Auth',
-    initialRouteName: 'Auth',
+    initialRouteName: AsyncStorage.getItem('token') ? 'App' : 'Auth',
+    // initialRouteName: 'Auth',
   },
 );
 

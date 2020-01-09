@@ -14,12 +14,16 @@ import {Button, SocialButton, TextLink} from '../components';
 import apiEndpoint from '../../config/api';
 
 import {colors, typography, dimensions} from '../theme';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const Home = ({navigation}) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
-
+  const logout = () => {
+    AsyncStorage.setItem('token', '');
+    navigation.navigate('Login');
+  };
   const submit = () => {
     if (name && amount && category) {
       const userObj = {
@@ -79,6 +83,7 @@ export const Home = ({navigation}) => {
             autoCorrect={false}
           />
           <Button text="ADD" callBack={submit} />
+          <Button text="Logout" callBack={logout} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
