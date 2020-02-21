@@ -17,10 +17,13 @@ import {colors} from './src/theme';
 import {Signup} from './src/screens/signup';
 import {Login} from './src/screens/login';
 import {Home} from './src/screens/home';
+import {Settings} from './src/screens/settings';
+import {Summary} from './src/screens/summary';
 // import { Saved } from './src/screens/saved/saved';
 // import { Profile } from './src/screens/profile/profile';
 // import { Event } from './src/screens/event/event';
 
+Icon.loadFont();
 const AuthStack = createStackNavigator(
   {
     Signup: Signup,
@@ -33,8 +36,8 @@ const AuthStack = createStackNavigator(
 const AppStack = createBottomTabNavigator(
   {
     Home: Home,
-    // Saved: Saved,
-    // Profile: Profile,
+    Settings: Settings,
+    Summary: Summary,
   },
   {
     initialRouteName: 'Home',
@@ -44,18 +47,12 @@ const AppStack = createBottomTabNavigator(
         let iconName;
         if (routeName === 'Home') {
           iconName = 'home';
-        } else if (routeName === 'Saved') {
-          iconName = 'bookmark';
-        } else if (routeName === 'Profile') {
+        } else if (routeName === 'Settings') {
+          iconName = 'wrench';
+        } else if (routeName === 'Summary') {
           iconName = 'user';
         }
-        return (
-          <Icon
-            color={focused ? colors.primary : colors.primaryDark}
-            size={20}
-            name={iconName}
-          />
-        );
+        return <Icon color={colors.primary} size={20} name={iconName} />;
       },
     }),
     tabBarOptions: {

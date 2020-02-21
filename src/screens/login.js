@@ -11,6 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import {getPlaces} from '../util';
 
 import {Button, SocialButton, TextLink} from '../components';
 import apiEndpoint from '../../config/api';
@@ -18,13 +19,13 @@ import apiEndpoint from '../../config/api';
 import {colors, typography, dimensions} from '../theme';
 
 export const Login = ({navigation}) => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('09053018005');
+  const [password, setPassword] = useState('password');
 
   const goToSignup = () => {
     navigation.navigate('Signup');
   };
-  const doLogIn = () => {
+  const doLogIn = async function() {
     let data = {
       phone,
       password,
@@ -36,14 +37,15 @@ export const Login = ({navigation}) => {
         url: `${apiEndpoint}/user/login`,
         headers: {'Content-Type': 'application/json; charset=utf-8'},
       }).then(
-        response => {
+        async response => {
           const {data} = response;
           const {token, user} = data;
+          const {places, categories} = user;
           axios.defaults.headers.common.Authorization = token;
           AsyncStorage.setItem('token', token);
           AsyncStorage.setItem('user', JSON.stringify(user));
-          navigation.navigate('Home');
-          console.log(response);
+          console.log(places, categories);
+          navigation.navigate('Home', {places, categories});
         },
         error => {
           console.log(error.response, 'kk');
