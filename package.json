@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.3.3",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dayjs": "^1.8.20",
     "jetifier": "^1.6.5",
     "react": "16.9.0",
